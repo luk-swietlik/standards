@@ -22,6 +22,7 @@
   ```
 
 * **Variables**
+  - define variables at the beginning of scope
   - remove unused variables from code
   
   eslint: [`no-unused-vars`](http://eslint.org/docs/rules/no-unused-vars)
@@ -350,7 +351,7 @@
   function foo ()        // ✗ avoid
   ```
   
-* ** Globals & shadowed**
+* **Globals & shadowed**
   - avoid declaring global variables; declare only own namespace and then put everything inside of it
   - always use var, let, const
   - Restricted names should not be shadowed
