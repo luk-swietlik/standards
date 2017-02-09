@@ -1,2 +1,0 @@
-# standard
-Standard Code Style
