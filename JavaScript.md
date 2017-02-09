@@ -460,6 +460,8 @@
   if (isNaN(price)) { }       // ✓ ok
   ```
   
+* **Always handle the error callback (eg. for ajax)**
+  
 * Never start a line with `(`, `[`, or `` ` ``. This is the only gotcha with omitting semicolons, and standard protects you from this potential issue.
 
   eslint: [`no-unexpected-multiline`](http://eslint.org/docs/rules/no-unexpected-multiline)
