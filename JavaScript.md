@@ -2,13 +2,6 @@
 
 ![js-standard-code-style](http://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/2236/large/1413860642/javascript.png)
 
-
-```diff
-- fsdfsdf
-+ dsfsdf
-```
-
-
 ## Code Standard Rules
 
 * **Indentation** 
@@ -40,8 +33,10 @@
 
   - Disallow Early Use (especially important `let` & `const` to avoid 'temporal dead zone') [eslint: [`no-use-before-define`](http://eslint.org/docs/rules/no-use-before-define)]
 
+  ```diff
+  + ✓ ok
+  ```
   ```js
-  // ✓ ok
   var a;
   a = 10;
   alert(a);
@@ -52,8 +47,11 @@
       alert(c);
   }
   ```
+  
+  ```diff
+  - ✗ avoid
+  ```
   ```js
-  // ✗ avoid
   alert(a);
   var a = 10;
 
