@@ -6,23 +6,25 @@
 ## Code Standard Rules
 
 * **Indentation** 
-  - 1 indentation = 4 spaces
-  - turn on display of whitespace in the editor
-  - set this indentation as default for the editor
-  
-  eslint: [`indent`](http://eslint.org/docs/rules/indent)
+  - 1 indentation = 4 spaces [eslint: [`indent`](http://eslint.org/docs/rules/indent)]
+  - Turn on display of whitespace in the editor
+  - Set this indentation as default for the editor
+  - Disallow all tabs [eslint: [`no-tabs`](http://eslint.org/docs/rules/no-tabs)]
   
 * **Strings**
-  - use single quotes for strings [eslint: [`quotes`](http://eslint.org/docs/rules/quotes)]
+  - Use single quotes for strings [eslint: [`quotes`](http://eslint.org/docs/rules/quotes)]
   
   ```js
   document.getElementById('string');
   txt = 'lorem "quote" ipsum';
   ```
 
+  - From ES6 allow backtick strings to avoid escaping single or double quotes
+  - Disallow unnecessary escape usage [eslint: [`no-useless-escape`](http://eslint.org/docs/rules/no-useless-escape)]
+
 * **Variables**
-  - define variables at the beginning of scope
-  - remove unused variables from code [eslint: [`no-unused-vars`](http://eslint.org/docs/rules/no-unused-vars)]
+  - Define variables at the beginning of scope
+  - Remove unused variables from code [eslint: [`no-unused-vars`](http://eslint.org/docs/rules/no-unused-vars)]
   - Avoid modifying `const` declarations [eslint: [`no-const-assign`](http://eslint.org/docs/rules/no-const-assign)]
 
   ```js
@@ -30,11 +32,36 @@
   score = 125;         // ✗ avoid
   ```
 
+  - Disallow Early Use (especially important `let` & `const` to avoid 'temporal dead zone') [eslint: [`no-use-before-define`](http://eslint.org/docs/rules/no-use-before-define)]
+
+  ```js
+  // ✓ ok
+  var a;
+  a = 10;
+  alert(a);
+
+  {
+      let c;
+      c = 10;
+      alert(c);
+  }
+  ```
+  ```js
+  // ✗ avoid
+  alert(a);
+  var a = 10;
+
+  {
+      alert(c);
+      let c = 10;
+  }
+  ```
+
 * **Naming**
-   - use one variable declaration for initialized variables per scope
+   - Use one variable declaration for initialized variables per scope
    
   ```js
-  // ✗ ok
+  // ✓ ok
   f = foo () {
     var a1,
         a2,
@@ -50,7 +77,7 @@
   }
   ```
 
-  - use camelcase when naming variables and functions. [eslint: [`camelcase`](http://eslint.org/docs/rules/camelcase)]
+  - Use camelcase when naming variables and functions. [eslint: [`camelcase`](http://eslint.org/docs/rules/camelcase)]
 
   ```js
   myFunction () { }    // ✓ ok
@@ -88,6 +115,15 @@
   console.log ('hello');   // ✗ avoid
   ```
   
+  - Disallow whitespace before properties [eslint: [`no-whitespace-before-property`](http://eslint.org/docs/rules/no-whitespace-before-property)]
+
+  ```js
+  foo[bar];   // ✓ ok
+  foo.bar;    // ✓ ok
+  foo [bar];   // ✗ avoid
+  foo .bar;    // ✗ avoid
+  ```
+
   - Infix operators must be spaced [eslint: [`space-infix-ops`](http://eslint.org/docs/rules/space-infix-ops)]
 
   ```js
@@ -104,7 +140,7 @@
   function (p1,p2)    // ✗ avoid
   ```
   
-  - add space between colon and value in key value pairs [eslint: [`key-spacing`](http://eslint.org/docs/rules/key-spacing)]
+  - Add space between colon and value in key value pairs [eslint: [`key-spacing`](http://eslint.org/docs/rules/key-spacing)]
 
   ```js
   var obj = { 'key': 'value' }    // ✓ ok
@@ -141,21 +177,23 @@
   typeof!admin        // ✗ avoid
   ```
 
-  - Use spaces inside comments [eslint: [`spaced-comment`](http://eslint.org/docs/rules/spaced-comment)]
+  - Use at least one spaces inside comments (from the beginning and the end) [eslint: [`spaced-comment`](http://eslint.org/docs/rules/spaced-comment)]
   - Always use block comments
 
   ```js
-  // comment   // ✓ ok
-  //comment    // ✗ avoid
   /* comment */   // ✓ ok
   /*comment*/     // ✗ avoid
+  // comment      // ✗ avoid
+  //comment       // ✗ avoid
   ```
 
   - No spacing in template strings [eslint: [`template-curly-spacing`](http://eslint.org/docs/rules/template-curly-spacing)]
+  - Disallow template literal placeholder syntax in regular strings [eslint: [`no-template-curly-in-string`](http://eslint.org/docs/rules/no-template-curly-in-string)]
 
   ```js
-  const message = `Hello, ${name}`      // ✓ ok
-  const message = `Hello, ${ name }`    // ✗ avoid
+  const message = `Hello, ${name}`     // ✓ ok
+  const message = `Hello, ${ name }`   // ✗ avoid
+  const message = 'Hello, ${name}'     // ✗ avoid
   ```
 
 * **Commas & dots**
@@ -236,7 +274,7 @@
   if (name == 'John')    // ✗ avoid
   ```
   
-* **Globals & shadowed**
+* **Globals, nativs & shadowed**
   - Always prefix browser globals with `window`. Exceptions are: `document`, `console` and `navigator`. [eslint: [`no-undef`](http://eslint.org/docs/rules/no-undef)]
 
   ```js
@@ -245,6 +283,7 @@
   
   - Avoid declaring global variables; declare only own namespace and then put everything inside of it
   - Always use var, let, const
+  - Disallow assignment to native objects or read-only global variables [eslint: [`no-global-assign`](http://eslint.org/docs/rules/no-global-assign)]
   - Restricted names should not be shadowed [eslint: [`no-shadow-restricted-names`](http://eslint.org/docs/rules/no-shadow-restricted-names)]
 
   ```js
@@ -252,7 +291,19 @@
   ```
 
 * **Linebreaks**
-  - Write object properties in new lines
+  - Enforce placing object properties on separate lines [eslint: [`object-property-newline`](http://eslint.org/docs/rules/object-property-newline)]
+
+  ```js
+  // ✓ ok
+  var obj = {
+    foo: 'foo',
+    bar: 'bar',
+    baz: 'baz'
+  };
+
+  var obj = { foo: 'foo', bar: 'bar', baz: 'baz' };   // ✗ avoid
+  ```
+
   - Multiple blank lines not allowed [eslint: [`no-multiple-empty-lines`](http://eslint.org/docs/rules/no-multiple-empty-lines)]
 
   ```js
@@ -309,16 +360,31 @@
   nums.forEach(bar)
   ```
   
-* **Ternary operator**
+* **Operators**
   - No ternary operators when simpler alternatives exist [eslint: [`no-unneeded-ternary`](http://eslint.org/docs/rules/no-unneeded-ternary)]
 
   ```js
   var score = val || 0        // ✓ ok
   var score = val ? val : 0   // ✗ avoid
   ```
+
+  - Disallow mixes of different operators [eslint: [`no-mixed-operators`](http://eslint.org/docs/rules/no-mixed-operators)]
+
+  ```js
+  var foo = (a && b < 0) || c > 0 || d + 1 === 0;   // ✓ ok
+  var foo = a && (b < 0 || c > 0 || d + 1 === 0);   // ✓ ok
+  var foo = a && b < 0 || c > 0 || d + 1 === 0;     // ✗ avoid
+
+  var foo = a + (b * c);   // ✓ ok
+  var foo = (a + b) * c;   // ✓ ok
+  var foo = a + b * c;     // ✗ avoid
+
+  var foo = a || b || c;   // ✓ ok
+  var foo = a && b && c;   // ✓ ok
+  ```
   
 * **Assignments**
-  - Avoid conditional/return assignments [eslint: [`no-cond-assign`](http://eslint.org/docs/rules/no-cond-assign)]
+  - Avoid conditional & `return` assignments [eslint: [`no-cond-assign`](http://eslint.org/docs/rules/no-cond-assign)]
 
   ```js
   if ((someVar = someNode) !== null)   // ✗ avoid
@@ -376,7 +442,7 @@
   eslint: [`no-eval`](http://eslint.org/docs/rules/no-eval)
 
   ```js
-  eval( "var result = user." + propName )   // ✗ avoid
+  eval( 'var result = user.' + propName )   // ✗ avoid
   ```
   
 * **Native objects**
@@ -407,12 +473,15 @@
   ```
 
 * **Functions**
-  - avoid Function Declaration, use Function Expression instead
+  - Avoid Function Declaration, use Function Expression instead.
   
   ```js
   var foo = function ()   // ✓ ok
   function foo ()         // ✗ avoid
   ```
+
+  - Disallow redundant `return` statements [eslint: [`no-useless-return`](http://eslint.org/docs/rules/no-useless-return)]
+    A `return;` statement with nothing after it is redundant, and has no effect on the runtime behavior of a function. This can be confusing, so it's better to disallow these redundant statements.
 
  * **Unreachable code**
    - No unreachable code after `return`, `throw`, `continue`, `break`, `yield` statements [eslint: [`no-unreachable`](http://eslint.org/docs/rules/no-unreachable)]
@@ -446,3 +515,16 @@
   
 * **Always handle the error callback (eg. for ajax)**
   
+* **`typeof`**
+  - Enforce comparing `typeof` expressions against valid strings ('undefined', 'object', 'boolean', 'number', 'string', 'function', 'symbol') [eslint: [`valid-typeof`](http://eslint.org/docs/rules/valid-typeof)]
+
+  ```js
+  typeof foo === 'undefined'   // ✓ ok
+  typeof foo === typeof bar    // ✓ ok
+  typeof foo == 'undefined'    // ✗ avoid
+  typeof foo == 'someString'   // ✗ avoid
+  ```
+
+* Disallow renaming import, export, and destructured assignments to the same name [eslint: [`no-useless-rename`](http://eslint.org/docs/rules/no-useless-rename)]
+* Enforce spacing between rest and spread operators and their expressions [eslint: [`rest-spread-spacing`](http://eslint.org/docs/rules/rest-spread-spacing)]
+* Disallow unnecessary computed property keys on objects [eslint: [`no-useless-computed-key`](http://eslint.org/docs/rules/no-useless-computed-key)]
