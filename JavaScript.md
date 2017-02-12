@@ -5,10 +5,10 @@
 
 
 
-<span style="color:#950000">✗ avoid</span>
+<p style="color:#950000">✗ avoid</p>
 
 ```js
-test -test
+test <span style="color:#950000">test</span>
 ```
 
 
