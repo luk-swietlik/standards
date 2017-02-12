@@ -107,7 +107,7 @@
   if(condition)    // ✗ avoid
 
   else {   // ✓ ok
-  else{	   // ✗ avoid
+  else{    // ✗ avoid
   ```
   
   - Don't add a space before a function declaration's parentheses [eslint: [`space-before-function-paren`](http://eslint.org/docs/rules/space-before-function-paren)]
@@ -502,7 +502,7 @@
   }
   ```
 
-* **flow control**
+* **Statements**
   - No flow control statements in `finally` blocks [eslint: [`no-unsafe-finally`](http://eslint.org/docs/rules/no-unsafe-finally)]
 
   ```js
@@ -515,7 +515,6 @@
   }
   ```
   
-* **`with` statements**
   - No using `with` statements [eslint: [`no-with`](http://eslint.org/docs/rules/no-with)]
 
   ```js
