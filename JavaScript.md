@@ -1,94 +1,101 @@
 #JavaScript
-### Code Standard 
 
 ![js-standard-code-style](http://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/2236/large/1413860642/javascript.png)
 
 
+## Code Standard Rules
 
-<p style="color:#950000">✗ avoid</p>
-
-```js
-test <span style="color:#950000">test</span>
-```
-
-
-## Rules
-
-* **Indentation:** 
+* **Indentation** 
   - 1 indentation = 4 spaces
   - turn on display of whitespace in the editor
-  - set this indentation as default for the editor [eslint: [`indent`](http://eslint.org/docs/rules/indent)]
+  - set this indentation as default for the editor
+  
+  eslint: [`indent`](http://eslint.org/docs/rules/indent)
   
 * **Strings**
-  - use single quotes for strings
-  
-  eslint: [`quotes`](http://eslint.org/docs/rules/quotes)
+  - use single quotes for strings [eslint: [`quotes`](http://eslint.org/docs/rules/quotes)]
   
   ```js
   document.getElementById('string');
+  txt = 'lorem "quote" ipsum';
   ```
 
 * **Variables**
   - define variables at the beginning of scope
-  - remove unused variables from code
-  
-  eslint: [`no-unused-vars`](http://eslint.org/docs/rules/no-unused-vars)
-  
-  - Avoid modifying `const` declarations
-
-  eslint: [`no-const-assign`](http://eslint.org/docs/rules/no-const-assign)
+  - remove unused variables from code [eslint: [`no-unused-vars`](http://eslint.org/docs/rules/no-unused-vars)]
+  - Avoid modifying `const` declarations [eslint: [`no-const-assign`](http://eslint.org/docs/rules/no-const-assign)]
 
   ```js
-  +const score = 100;
-  score = 125;        -// ✗ avoid
+  const score = 100;
+  score = 125;        // ✗ avoid
+  ```
+
+* **Naming**
+   - use one variable declaration for initialized variables per scope
+   
+  ```js
+  // ✗ ok
+  f = foo () {
+    var a1,
+        a2,
+        a3;
+  }
+  ```
+  ```js
+  // ✗ avoid
+  f = foo () {
+    var a1;
+    var a2;
+    var a3;
+  }
+  ```
+
+  - use camelcase when naming variables and functions. [eslint: [`camelcase`](http://eslint.org/docs/rules/camelcase)]
+
+  ```js
+    my_function () { }    // ✗ avoid
+    myFunction () { }     // ✓ ok
+
+    var my_var = 'hello'           // ✗ avoid
+    var myVar = 'hello'            // ✓ ok
   ```
   
+  - Constructor names must begin with a capital letter, const with uppercase, jQuery objects with &
+
 * **Spacing**
   - Avoid multiple spaces
-  - Add a space after keywords
-  
-  eslint: [`keyword-spacing`](http://eslint.org/docs/rules/keyword-spacing)
+  - Add a space after keywords [eslint: [`keyword-spacing`](http://eslint.org/docs/rules/keyword-spacing)]
 
   ```js
   if (condition)  // ✓ ok
   if(condition)   // ✗ avoid
+
+  else {  // ✓ ok
+  else{	  // ✗ avoid
   ```
   
-  - Add a space before a function declaration's parentheses
-  
-  eslint: [`space-before-function-paren`](http://eslint.org/docs/rules/space-before-function-paren)
+  - Don't add a space before a function declaration's parentheses [eslint: [`space-before-function-paren`](http://eslint.org/docs/rules/space-before-function-paren)]
 
   ```js
-  var bar = function () { // ✓ ok
-  var bar = function() {  // ✗ avoid
-  
-  bar () // ✓ ok
-  bar()  // ✗ avoid
+  var bar = function() {  // ✓ ok
+  var bar = function () { // ✗ avoid
   ```
   
-  - [ or ]
-  
-  - No space between function identifiers and their invocations
-
-  eslint: [`func-call-spacing`](http://eslint.org/docs/rules/func-call-spacing)
+  - No space between function identifiers and their invocations [eslint: [`func-call-spacing`](http://eslint.org/docs/rules/func-call-spacing)]
 
   ```js
-  console.log ('hello'); // ✗ avoid
   console.log('hello');  // ✓ ok
+  console.log ('hello'); // ✗ avoid
   ```
   
-  - Infix operators must be spaced
-  
-  eslint: [`space-infix-ops`](http://eslint.org/docs/rules/space-infix-ops)
+  - Infix operators must be spaced [eslint: [`space-infix-ops`](http://eslint.org/docs/rules/space-infix-ops)]
 
   ```js
-  var x = 2 + 5  // ✓ ok
-  var x=2+5      // ✗ avoid
+  var x = 2 + 5;  // ✓ ok
+  var x=2+5;      // ✗ avoid
   ```
   
-  - Commas should have a space after them
-  
-  eslint: [`comma-spacing`](http://eslint.org/docs/rules/comma-spacing)
+  - Commas should have a space after them [eslint: [`comma-spacing`](http://eslint.org/docs/rules/comma-spacing)]
 
   ```js
   var list = [1, 2, 3, 4] // ✓ ok
@@ -97,9 +104,7 @@ test <span style="color:#950000">test</span>
   function (p1,p2)   // ✗ avoid
   ```
   
-  - add space between colon and value in key value pairs
-  
-    eslint: [`key-spacing`](http://eslint.org/docs/rules/key-spacing)
+  - add space between colon and value in key value pairs [eslint: [`key-spacing`](http://eslint.org/docs/rules/key-spacing)]
 
   ```js
   var obj = { 'key' : 'value' }    // ✗ avoid
@@ -108,21 +113,63 @@ test <span style="color:#950000">test</span>
   var obj = { 'key': 'value' }     // ✓ ok
   ```
 
-* **Commas & dots**
-
-  - Trailing commas not allowed.
-
-  eslint: [`comma-dangle`](http://eslint.org/docs/rules/comma-dangle)
+  - Semicolon's must have a space after and no space before [eslint: [`semi-spacing`](http://eslint.org/docs/rules/semi-spacing)]
 
   ```js
-    var obj = {
-      message: 'hello',   // ✗ avoid
-    }
+  for (let i = 0 ;i < items.length ;i++) {...}    // ✗ avoid
+  for (let i = 0; i < items.length; i++) {...}    // ✓ ok
+  ```
+
+  - Must have a space before blocks [eslint: [`space-before-blocks`](http://eslint.org/docs/rules/space-before-blocks)]
+
+  ```js
+  if (admin){...}     // ✗ avoid
+  if (admin) {...}    // ✓ ok
+  ```
+
+  - No spaces inside parens [eslint: [`space-in-parens`](http://eslint.org/docs/rules/space-in-parens)]
+
+  ```js
+  getName( name )     // ✗ avoid
+  getName(name)       // ✓ ok
+  ```
+
+  - Unary operators must have a space after [eslint: [`space-unary-ops`](http://eslint.org/docs/rules/space-unary-ops)]
+
+  ```js
+  typeof!admin        // ✗ avoid
+  typof !admin        // ✓ ok
+  ```
+
+  - Use spaces inside comments [eslint: [`spaced-comment`](http://eslint.org/docs/rules/spaced-comment)]
+  - Always use block comments
+
+  ```js
+  // comment   // ✓ ok
+  //comment    // ✗ avoid
+  /* comment */   // ✓ ok
+  /*comment*/     // ✗ avoid
+  ```
+
+  - No spacing in template strings [eslint: [`template-curly-spacing`](http://eslint.org/docs/rules/template-curly-spacing)]
+
+  ```js
+  const message = `Hello, ${ name }`    // ✗ avoid
+  const message = `Hello, ${name}`      // ✓ ok
+  ```
+
+* **Commas & dots**
+
+  - Trailing commas not allowed. [eslint: [`comma-dangle`](http://eslint.org/docs/rules/comma-dangle)]
+
+  ```js
+    obj = { 'k': 1 }   // ✓ ok
+    obj = { 'k': 1, }  // ✗ avoid
+    arr = [1,2,3]      // ✓ ok
+    arr = [1,2,3,]     // ✗ avoid
   ```
   
-  - Commas must be placed at the end of the current line.
-
-  eslint: [`comma-style`](http://eslint.org/docs/rules/comma-style)
+  - Commas must be placed at the end of the current line. [eslint: [`comma-style`](http://eslint.org/docs/rules/comma-style)]
 
   ```js
     var obj = {
@@ -135,17 +182,8 @@ test <span style="color:#950000">test</span>
       bar: 'bar'   // ✓ ok
     }
   ```
- 
-  - avoid put comma after last array/object item
   
-   ```js
-    [1,2,3,]     // ✗ avoid
-    { 'k': 1, }  // ✗ avoid
-  ```
-  
-  -Dot should be on the same line as property
-
-  eslint: [`dot-location`](http://eslint.org/docs/rules/dot-location)
+  -Dot should be on the same line as property [eslint: [`dot-location`](http://eslint.org/docs/rules/dot-location)]
 
   ```js
     console.
@@ -157,11 +195,10 @@ test <span style="color:#950000">test</span>
 
 * **Curly braces**
   - Always use curly braces for statements and loops
-  - Always start curly brace with the same line
+  - Don't start curly brace from new line
   - Keep else statements on the same line as their curly braces
   
-  eslint: [`curly`](http://eslint.org/docs/rules/curly)
-  eslint: [`brace-style`](http://eslint.org/docs/rules/brace-style)
+  [eslint: [`curly`](http://eslint.org/docs/rules/curly), [`brace-style`](http://eslint.org/docs/rules/brace-style)]
 
   ```js
   // ✓ ok
@@ -182,11 +219,9 @@ test <span style="color:#950000">test</span>
     // ...
   ```
   
-* **Blocks**
+* **Blocks** (?)
   - Allow or disallow single line blocks (?)
-  - Add spaces inside single line blocks
-  
-  eslint: [`block-spacing`](http://eslint.org/docs/rules/block-spacing)
+  - Add spaces inside single line blocks [eslint: [`block-spacing`](http://eslint.org/docs/rules/block-spacing)]
 
   ```js
     function foo () {return true}    // ✗ avoid
@@ -194,29 +229,31 @@ test <span style="color:#950000">test</span>
   ```
   
 * **Comparison**
-  - Always use `===` instead of `==`
-  
-  eslint: [`eqeqeq`](http://eslint.org/docs/rules/eqeqeq)
+  - Always use `===` instead of `==` [eslint: [`eqeqeq`](http://eslint.org/docs/rules/eqeqeq)]
 
   ```js
   if (name === 'John')   // ✓ ok
   if (name == 'John')    // ✗ avoid
   ```
   
-* **Globals**
-  Always prefix browser globals with `window`
-  Exceptions are: `document`, `console` and `navigator`.
-
-  eslint: [`no-undef`](http://eslint.org/docs/rules/no-undef)
+* **Globals & shadowed**
+  - Always prefix browser globals with `window`. Exceptions are: `document`, `console` and `navigator`. [eslint: [`no-undef`](http://eslint.org/docs/rules/no-undef)]
 
   ```js
   window.alert('abc')   // ✓ ok
   ```
   
-* **Linebreaks**
-  - Multiple blank lines not allowed
+  - Avoid declaring global variables; declare only own namespace and then put everything inside of it
+  - Always use var, let, const
+  - Restricted names should not be shadowed [eslint: [`no-shadow-restricted-names`](http://eslint.org/docs/rules/no-shadow-restricted-names)]
 
-  eslint: [`no-multiple-empty-lines`](http://eslint.org/docs/rules/no-multiple-empty-lines)
+  ```js
+  var undefined = 'value'   // ✗ avoid
+  ```
+
+* **Linebreaks**
+  - write object properties in new lines
+  - Multiple blank lines not allowed [eslint: [`no-multiple-empty-lines`](http://eslint.org/docs/rules/no-multiple-empty-lines)]
 
   ```js
   // ✓ ok
@@ -227,66 +264,37 @@ test <span style="color:#950000">test</span>
   ```js
   // ✗ avoid
   var value = 'hello world';
-  
-  
+   
+   
   value = 'world hello';
   ```
   
 * **Ternary operator**
-  - No ternary operators when simpler alternatives exist
-
-  eslint: [`no-unneeded-ternary`](http://eslint.org/docs/rules/no-unneeded-ternary)
+  - No ternary operators when simpler alternatives exist [eslint: [`no-unneeded-ternary`](http://eslint.org/docs/rules/no-unneeded-ternary)]
 
   ```js
-  let score = val ? val : 0     // ✗ avoid
-  let score = val || 0          // ✓ ok
+  var score = val || 0        // ✓ ok
+  var score = val ? val : 0   // ✗ avoid
   ```
   
-* **Assignments** ??
-  - Avoid or wrap conditional/return assignments ??
-  eslint: [`no-cond-assign`](http://eslint.org/docs/rules/no-cond-assign)
-
- * **Naming**
-   - use one variable declaration for initialized variables per scope
-   
-    ```js
-  // ✗ ok
-  var f = foo () {
-    vsr a1,
-        a2,
-        a3;
-  }
-  ```
-
-  - use camelcase when naming variables and functions.
-
-  eslint: [`camelcase`](http://eslint.org/docs/rules/camelcase)
+* **Assignments**
+  - Avoid conditional/return assignments [eslint: [`no-cond-assign`](http://eslint.org/docs/rules/no-cond-assign)]
 
   ```js
-    my_function () { }    // ✗ avoid
-    myFunction () { }     // ✓ ok
-
-    var my_var = 'hello'           // ✗ avoid
-    var myVar = 'hello'            // ✓ ok
+  if ((someVar = someNode) !== null)   // ✗ avoid
   ```
-  
-  - Constructor names must begin with a capital letter, const with uppercase, jQuery objects with &
 
 * **Literals and constructors**
   
-  - Usually use literals instead of constructors
-    
-  eslint: [`no-array-constructor`](http://eslint.org/docs/rules/no-array-constructor)
+  - Usually use literals instead of constructors [eslint: [`no-array-constructor`](http://eslint.org/docs/rules/no-array-constructor)]
 
   ```js
   var nums = new Array(1, 2, 3)   // ✗ avoid
   var nums = [1, 2, 3]            // ✓ ok
   ```
   
-* **callee & caller**
-  - Avoid using `arguments.callee` and `arguments.caller`.**
-
-  eslint: [`no-caller`](http://eslint.org/docs/rules/no-caller)
+* **Callee & caller**
+  - Avoid using `arguments.callee` and `arguments.caller` [eslint: [`no-caller`](http://eslint.org/docs/rules/no-caller)]
 
   ```js
   function foo (n) {
@@ -305,18 +313,14 @@ test <span style="color:#950000">test</span>
   ```
   
 * **Debug & log**
-  - No debug & log statements
-  
-  eslint: [`no-debugger`](http://eslint.org/docs/rules/no-debugger)
+  - No debug & log statements [eslint: [`no-debugger`](http://eslint.org/docs/rules/no-debugger)]
 
   ```js
     debugger;       // ✗ avoid
     console.log();  // ✗ avoid
   ```
   
-* **No `delete` operator on variables.**
-
-  eslint: [`no-delete-var`](http://eslint.org/docs/rules/no-delete-var)
+* **No `delete` operator on variables.** [eslint: [`no-delete-var`](http://eslint.org/docs/rules/no-delete-var)]
 
   ```js
   var name
@@ -347,8 +351,20 @@ test <span style="color:#950000">test</span>
 * **Parentheses**
   - Avoid unnecessary parentheses
   
-* **Floating decimals**
-  - watch out for floating-point numbers
+* **Numbers**
+  - Watch out for floating-point numbers
+  - Always use radix for `paresInt()`
+
+  ```js
+  parseInt('111', 10);
+  ```
+
+  - Use `isNaN()` when checking for `NaN` [eslint: [`use-isnan`](http://eslint.org/docs/rules/use-isnan)]
+
+  ```js
+  if (price === NaN) { }      // ✗ avoid
+  if (isNaN(price)) { }       // ✓ ok
+  ```
 
 * **Functions**
   - avoid Function Declaration, use Function Expression instead
@@ -357,18 +373,7 @@ test <span style="color:#950000">test</span>
   var foo = function ()  // ✓ ok
   function foo ()        // ✗ avoid
   ```
-  
-* **Globals & shadowed**
-  - avoid declaring global variables; declare only own namespace and then put everything inside of it
-  - always use var, let, const
-  - Restricted names should not be shadowed
 
-  eslint: [`no-shadow-restricted-names`](http://eslint.org/docs/rules/no-shadow-restricted-names)
-
-  ```js
-  let undefined = 'value'     // ✗ avoid
-  ```
-  
  * **No unreachable code after `return`, `throw`, `continue`, `break`, `yield` statements.**
 
   eslint: [`no-unreachable`](http://eslint.org/docs/rules/no-unreachable)
@@ -390,7 +395,7 @@ test <span style="color:#950000">test</span>
   } catch (e) {
     // ...
   } finally {
-    return 42     // ✗ avoid
+    return 42   // ✗ avoid
   }
   ```
   
@@ -399,72 +404,7 @@ test <span style="color:#950000">test</span>
   eslint: [`no-with`](http://eslint.org/docs/rules/no-with)
 
   ```js
-  with (val) {...}    // ✗ avoid
-  ```
-  
-* **write object properties in new lines**
-
-* **Semicolon's must have a space after and no space before.**
-
-  eslint: [`semi-spacing`](http://eslint.org/docs/rules/semi-spacing)
-
-  ```js
-  for (let i = 0 ;i < items.length ;i++) {...}    // ✗ avoid
-  for (let i = 0; i < items.length; i++) {...}    // ✓ ok
-  ```
-
-* **Must have a space before blocks.**
-
-  eslint: [`space-before-blocks`](http://eslint.org/docs/rules/space-before-blocks)
-
-  ```js
-  if (admin){...}     // ✗ avoid
-  if (admin) {...}    // ✓ ok
-  ```
-
-* **No spaces inside parens.**
-
-  eslint: [`space-in-parens`](http://eslint.org/docs/rules/space-in-parens)
-
-  ```js
-  getName( name )     // ✗ avoid
-  getName(name)       // ✓ ok
-  ```
-
-* **Unary operators must have a space after.**
-
-  eslint: [`space-unary-ops`](http://eslint.org/docs/rules/space-unary-ops)
-
-  ```js
-  typeof!admin        // ✗ avoid
-  typof !admin        // ✓ ok
-  ```
-
-* **Use spaces inside comments.**
-
-  eslint: [`spaced-comment`](http://eslint.org/docs/rules/spaced-comment)
-
-  ```js
-  //comment           // ✗ avoid
-  // comment          // ✓ ok
-  ```
-
-* **No spacing in template strings.**
-
-  eslint: [`template-curly-spacing`](http://eslint.org/docs/rules/template-curly-spacing)
-
-  ```js
-  const message = `Hello, ${ name }`    // ✗ avoid
-  const message = `Hello, ${name}`      // ✓ ok
-  ```
-
-* **Use `isNaN()` when checking for `NaN`.**
-
-  eslint: [`use-isnan`](http://eslint.org/docs/rules/use-isnan)
-
-  ```js
-  if (price === NaN) { }      // ✗ avoid
-  if (isNaN(price)) { }       // ✓ ok
+  with (val) {...}   // ✗ avoid
   ```
   
 * **Always handle the error callback (eg. for ajax)**
@@ -486,22 +426,14 @@ test <span style="color:#950000">test</span>
   ```
 
   ```js
-  // ✓ ok
-  ;[1, 2, 3].forEach(bar)
-
-  // ✗ avoid
-  [1, 2, 3].forEach(bar)
+  ;[1, 2, 3].forEach(bar)   // ✓ ok
+  [1, 2, 3].forEach(bar)    // ✗ avoid
   ```
 
   ```js
-  // ✓ ok
-  ;`hello`.indexOf('o')
-
-  // ✗ avoid
-  `hello`.indexOf('o')
+  ;`hello`.indexOf('o')   // ✓ ok
+  `hello`.indexOf('o')    // ✗ avoid
   ```
-
-  Note: If you're often writing code like this, you may be trying to be too clever.
 
   Clever short-hands are discouraged, in favor of clear and readable expressions, whenever
   possible.
@@ -518,4 +450,3 @@ test <span style="color:#950000">test</span>
   var nums = [1, 2, 3]
   nums.forEach(bar)
   ```
-  
