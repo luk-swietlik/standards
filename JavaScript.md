@@ -1,16 +1,23 @@
 #JavaScript
+### Code Standard 
 
 ![js-standard-code-style](http://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/2236/large/1413860642/javascript.png)
+
+
+
+<span style="color:#950000">✗ avoid</span>
+
+```js
+test -test
+```
 
 
 ## Rules
 
 * **Indentation:** 
-  - 1 tab (4 spaces long) || 4 spaces || 2 spaces
+  - 1 indentation = 4 spaces
   - turn on display of whitespace in the editor
-  - set this indentation as default for the editor
-  
-  eslint: [`indent`](http://eslint.org/docs/rules/indent)
+  - set this indentation as default for the editor [eslint: [`indent`](http://eslint.org/docs/rules/indent)]
   
 * **Strings**
   - use single quotes for strings
@@ -32,8 +39,8 @@
   eslint: [`no-const-assign`](http://eslint.org/docs/rules/no-const-assign)
 
   ```js
-  const score = 100;
-  score = 125;        // ✗ avoid
+  +const score = 100;
+  score = 125;        -// ✗ avoid
   ```
   
 * **Spacing**
