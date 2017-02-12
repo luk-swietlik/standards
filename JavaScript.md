@@ -3,10 +3,10 @@
 ![js-standard-code-style](http://d21ii91i3y6o6h.cloudfront.net/gallery_images/from_proof/2236/large/1413860642/javascript.png)
 
 
-````
+```diff
 - fsdfsdf
 + dsfsdf
-````
+```
 
 
 ## Code Standard Rules
